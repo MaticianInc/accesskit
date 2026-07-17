@@ -1,43 +1,43 @@
 [package]
 name = "accesskit_winit"
 version = "0.33.2"
-authors.workspace = true
+authors = ["The AccessKit contributors"]
 license = "Apache-2.0"
 description = "AccessKit UI accessibility infrastructure: winit adapter"
-categories.workspace = true
+categories = ["gui"]
 keywords = ["gui", "ui", "accessibility", "winit"]
-repository.workspace = true
+repository = "https://github.com/AccessKit/accesskit"
 readme = "README.md"
-edition.workspace = true
-rust-version.workspace = true
+edition = "2021"
+rust-version = "1.85"
 
 [features]
-default = ["accesskit_unix", "async-io", "rwh_06", "winit/x11", "winit/wayland"]
+default = ["accesskit_unix", "tokio", "rwh_06", "winit/x11", "winit/wayland"]
 rwh_05 = ["winit/rwh_05", "dep:rwh_05"]
 rwh_06 = ["winit/rwh_06", "dep:rwh_06"]
 async-io = ["accesskit_unix/async-io"]
 tokio = ["accesskit_unix/tokio"]
 
 [dependencies]
-accesskit = { version = "0.24.1", path = "../../common" }
+accesskit = { version = "0.24.1" }
 winit = { version = "0.30.5", default-features = false }
 rwh_05 = { package = "raw-window-handle", version = "0.5", features = ["std"], optional = true }
 rwh_06 = { package = "raw-window-handle", version = "0.6.2", features = ["std"], optional = true }
 
 [target.'cfg(target_os = "windows")'.dependencies]
-accesskit_windows = { version = "0.34.0", path = "../windows" }
+accesskit_windows = { version = "0.34.0" }
 
 [target.'cfg(target_os = "macos")'.dependencies]
-accesskit_macos = { version = "0.26.3", path = "../macos" }
+accesskit_macos = { version = "0.26.3" }
 
 [target.'cfg(any(target_os = "linux", target_os = "dragonfly", target_os = "freebsd", target_os = "openbsd", target_os = "netbsd"))'.dependencies]
-accesskit_unix = { version = "0.22.1", path = "../unix", optional = true, default-features = false }
+accesskit_unix = { version = "0.22.1", optional = true, default-features = false }
 
 [target.'cfg(target_os = "android")'.dependencies]
-accesskit_android = { version = "0.7.5", path = "../android", optional = true, features = ["embedded-dex"] }
+accesskit_android = { version = "0.7.5", optional = true, features = ["embedded-dex"] }
 
 [target.'cfg(target_os = "ios")'.dependencies]
-accesskit_ios = { version = "0.1.2", path = "../ios" }
+accesskit_ios = { version = "0.1.2" }
 
 [dev-dependencies.winit]
 version = "0.30.5"
